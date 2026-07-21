@@ -223,8 +223,20 @@ document
                 );
 
             if(field){
-                field.value = value;
-            }
+    console.log(
+        "Champ trouvé :",
+        key,
+        value
+    );
+
+    field.value = value;
+}
+else{
+    console.log(
+        "Champ NON trouvé :",
+        key
+    );
+}
 
         });
 
