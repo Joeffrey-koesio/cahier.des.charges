@@ -36,6 +36,7 @@ label{display:block;font-size:12px;font-weight:800;color:#655b75;margin-bottom:7
     <div class="actions">
       <button class="btn secondary" onclick="exportProject()">📤 Exporter</button>
       <button class="btn secondary" onclick="document.getElementById('importFile').click()">📥 Importer</button>
+	  <button class="btn secondary" onclick="newProject()">🆕 Nouveau dossier</button>
       <button class="btn" onclick="copySummary()">📋 Copier le résumé technique</button>
       <button class="btn" onclick="window.print()">🖨️ Imprimer / PDF</button>
     </div>
@@ -250,6 +251,21 @@ else{
 
 });
 });
+function newProject(){
+
+    if(!confirm(
+        "Voulez-vous vider complètement le dossier en cours ?"
+    )){
+        return;
+    }
+
+    form.reset();
+
+    updateProgress();
+
+    generateSummary();
+
+}
 </script>
 <input type="file" id="importFile" accept=".json" style="display:none">
 </body>
