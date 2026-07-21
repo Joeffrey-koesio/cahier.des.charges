@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Koesio - Cahier des charges IT & Télécom</title>
+<style>
+:root{
+  --violet:#5B2A86;--violet2:#8e24aa;--violet3:#6a1b9a;--rose:#ff8ae2;--bleu:#4f7cff;
+  --bg:#f5f2fa;--card:#ffffff;--txt:#282638;--muted:#6f6a7d;--line:#e9e1f2;
+  --ok:#1f9d55;--warn:#f5a623;--bad:#d64545;--shadow:0 18px 45px rgba(55,28,82,.14);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 0 0,#fff 0,#f8f3ff 35%,var(--bg) 100%);color:var(--txt)}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(120deg,var(--violet),var(--violet2),var(--violet3));color:#fff;box-shadow:0 10px 30px rgba(91,42,134,.25)}
+.top{max-width:1320px;margin:auto;padding:18px 20px;display:flex;align-items:center;gap:18px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:14px}.k{width:48px;height:48px;border-radius:14px;background:#fff;color:var(--violet);font-weight:900;font-size:32px;display:grid;place-items:center}.brand h1{margin:0;font-size:20px}.brand p{margin:2px 0 0;font-size:12px;opacity:.9}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:11px 14px;font-weight:750;cursor:pointer;background:#fff;color:var(--violet);box-shadow:0 8px 20px rgba(0,0,0,.12);transition:.2s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.progressWrap{height:7px;background:rgba(255,255,255,.22)}.progressBar{height:7px;width:0;background:linear-gradient(90deg,#fff,#ffd6f4,#aee2ff);transition:.3s}
+main{max-width:1320px;margin:auto;padding:24px 20px 70px;display:grid;grid-template-columns:300px 1fr;gap:22px}.side{position:sticky;top:94px;height:calc(100vh - 110px);overflow:auto}.panel{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);box-shadow:var(--shadow);border-radius:24px;padding:20px}.score{text-align:center}.score .big{font-size:52px;font-weight:900;color:var(--violet);line-height:1}.score small{color:var(--muted)}
+.badges{display:grid;gap:9px;margin-top:15px}.badge{padding:10px 12px;border-radius:14px;background:#f4edf9;color:#6f4b85;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:space-between}.badge.done{background:#e8f8ee;color:#14723c}.nav{display:grid;gap:8px;margin-top:16px}.nav a{text-decoration:none;color:var(--txt);padding:11px 12px;border-radius:14px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:13px}.nav a:hover{border-color:var(--violet2);color:var(--violet)}
+.content{display:grid;gap:18px}.hero{position:relative;overflow:hidden;border-radius:28px;padding:28px;background:linear-gradient(135deg,#fff,#f4e7ff);box-shadow:var(--shadow);border:1px solid #fff}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-80px;top:-80px;background:linear-gradient(135deg,rgba(142,36,170,.25),rgba(255,138,226,.2));filter:blur(8px)}.hero h2{margin:0 0 8px;font-size:30px;color:var(--violet)}.hero p{margin:0;color:var(--muted);max-width:850px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-weight:750;color:#5a4e68;font-size:13px}
+.section{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow);border-radius:24px;padding:22px}.section h3{margin:0 0 6px;color:var(--violet);display:flex;align-items:center;gap:10px}.section .hint{margin:0 0 18px;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}
+label{display:block;font-size:12px;font-weight:800;color:#655b75;margin-bottom:7px}.required label:after{content:" *";color:var(--bad)}input,select,textarea{width:100%;border:2px solid var(--line);border-radius:14px;padding:12px 13px;font:inherit;background:#fff;color:var(--txt);outline:none;transition:.2s}textarea{min-height:86px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--violet2);box-shadow:0 0 0 4px rgba(142,36,170,.11)}
+.repeat{border:1px dashed #d9c6e9;border-radius:18px;padding:14px;margin-bottom:12px;background:#fbf8ff}.repeatHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.mini{border:0;border-radius:10px;padding:8px 10px;font-weight:800;cursor:pointer;background:#f0e6f8;color:var(--violet)}.mini.danger{background:#ffe8e8;color:#a22626}.mini.ok{background:#e7f8ee;color:#13743c}.mini.blue{background:#eaf0ff;color:#2b52ad}
+.calc{background:linear-gradient(135deg,#5B2A86,#8e24aa,#6a1b9a);color:#fff;border-radius:22px;padding:18px;grid-column:1/-1}.calc label{color:#f3d9ff}.calc input,.calc select{border-color:rgba(255,255,255,.25)}.calcGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.result{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:14px}.result b{font-size:24px}.result small{display:block;opacity:.82;margin-bottom:5px}
+.summaryBox{white-space:pre-wrap;background:#181326;color:#f6efff;border-radius:18px;padding:18px;min-height:280px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:13px;line-height:1.5}.toast{position:fixed;right:18px;bottom:18px;background:#171321;color:#fff;padding:13px 15px;border-radius:14px;box-shadow:0 18px 45px rgba(0,0,0,.25);opacity:0;transform:translateY(12px);transition:.25s;z-index:50}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:980px){main{grid-template-columns:1fr}.side{position:relative;top:0;height:auto}.grid,.grid3{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.actions{width:100%}.btn{flex:1}.calcGrid{grid-template-columns:1fr}.hero h2{font-size:24px}}
+@media print{header,.side,.actions,.mini{display:none!important}main{display:block;padding:0}.section,.hero{box-shadow:none;border:1px solid #ddd;break-inside:avoid}.summaryBox{color:#000;background:#fff;border:1px solid #ddd}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="brand"><div class="k">k</div><div><h1>Cahier des charges IT & Télécom</h1><p>Version prototype - Koesio Méditerranée</p></div></div>
+    <div class="actions">
+      <button class="btn secondary" onclick="saveDraft()">💾 Sauvegarder</button>
+      <button class="btn secondary" onclick="loadDraft()">↩️ Recharger</button>
+      <button class="btn" onclick="copySummary()">📋 Copier le résumé technique</button>
+      <button class="btn" onclick="window.print()">🖨️ Imprimer / PDF</button>
+    </div>
+  </div>
+  <div class="progressWrap"><div id="progressBar" class="progressBar"></div></div>
+</header>
+<main>
+  <aside class="side">
+    <div class="panel score">
+      <div class="big"><span id="score">0</span>%</div><small>complété</small>
+      <div class="badges" id="badges"></div>
+      <nav class="nav">
+        <a href="#client">🏢 Client</a><a href="#site">📍 Site</a><a href="#projet">🎯 Projet</a><a href="#internet">🌐 Liens Internet</a><a href="#tel">☎️ Téléphonie</a><a href="#mobile">📱 Mobile</a><a href="#info">🖥️ Informatique</a><a href="#soft">☁️ Software</a><a href="#heberge">🏗️ Hébergé</a><a href="#photos">📸 Photos</a><a href="#resume">🧾 Résumé</a>
+      </nav>
+    </div>
+  </aside>
+  <section class="content">
+    <div class="hero">
+      <h2>Transformer le cahier des charges en parcours guidé 🚀</h2>
+      <p>Le commercial remplit les étapes, gagne des badges et obtient automatiquement un résumé clair pour l'équipe technique. Les champs importants sont marqués avec un astérisque.</p>
+      <div class="chips"><span class="chip">✅ Progression visible</span><span class="chip">🎮 Badges par section</span><span class="chip">🧮 Calculateur Acronis intégré</span><span class="chip">📋 Résumé copiable</span><span class="chip">💾 Brouillon local</span></div>
+    </div>
+
+    <form id="cdcForm">
+      <div id="client" class="section" data-section="Client">
+        <h3>🏢 Informations client - facturation</h3><p class="hint">Base administrative indispensable pour qualifier le dossier.</p>
+        <div class="grid">
+          <div class="required"><label>Raison sociale</label><input name="raison_sociale" required></div><div class="required"><label>SIRET</label><input name="siret" required></div>
+          <div class="required full"><label>Adresse de facturation</label><input name="adresse_facturation" required></div><div class="required"><label>Téléphone</label><input name="tel_facturation" required></div><div class="required"><label>Code Artis</label><input name="code_artis" required></div>
+          <div class="required"><label>Contact - Nom + prénom</label><input name="contact_nom" required></div><div class="required"><label>Contact - Fonction</label><input name="contact_fonction" required></div><div class="required"><label>Contact - Téléphone</label><input name="contact_tel" required></div><div class="required"><label>Contact - Email</label><input type="email" name="contact_email" required></div>
+        </div>
+      </div>
+
+      <div id="site" class="section" data-section="Site installation">
+        <h3>📍 Site d'installation</h3><p class="hint">Interlocuteur direct obligatoire pour la livraison et la mise en service.</p>
+        <div class="grid">
+          <div class="required"><label>Nom du site</label><input name="site_nom" required></div><div class="required"><label>SIRET du site</label><input name="site_siret" required></div><div class="required full"><label>Adresse du site</label><input name="site_adresse" required></div>
+          <div class="required"><label>Contact site - Nom + prénom</label><input name="site_contact_nom" required></div><div class="required"><label>Fonction</label><input name="site_contact_fonction" required></div><div class="required"><label>Téléphone direct</label><input name="site_contact_tel" required></div><div class="required"><label>Mobile</label><input name="site_contact_mobile" required></div><div class="required"><label>Email</label><input type="email" name="site_contact_email" required></div>
+        </div>
+      </div>
+
+      <div id="projet" class="section" data-section="Projet">
+        <h3>🎯 Projet</h3><p class="hint">Décrire le besoin avec le maximum de contexte, même ce qui paraît secondaire.</p>
+        <div class="grid"><div class="required full"><label>Description du projet</label><textarea name="projet_description" required placeholder="Ex : ouverture de site, déménagement, refonte téléphonie, migration cloud, sécurisation réseau..."></textarea></div><div class="full"><label>Contraintes / échéances / coupures acceptées</label><textarea name="projet_contraintes"></textarea></div></div>
+      </div>
+
+      <div id="internet" class="section" data-section="Liens Internet">
+        <h3>🌐 Liens Internet</h3><p class="hint">Dupliquer les blocs si plusieurs sites sont concernés.</p><div id="internetRepeats"></div><button type="button" class="mini ok" onclick="addInternet()">+ Ajouter un lien / site</button>
+      </div>
+
+      <div id="tel" class="section" data-section="Téléphonie">
+        <h3>☎️ Téléphonie</h3><p class="hint">Postes, portabilités, modèles, casques, messages audio et SVI.</p><div id="phoneRepeats"></div><button type="button" class="mini ok" onclick="addPhone()">+ Ajouter un poste / ligne</button>
+        <div class="grid" style="margin-top:14px"><div><label>Type de message audio souhaité</label><select name="audio_type"><option></option><option>Prédécroché</option><option>Attente</option><option>Répondeur</option><option>SVI</option></select></div><div><label>Abonnement messages</label><select name="audio_abonnement"><option></option><option>Oui</option><option>Non</option></select></div><div class="full"><label>Commentaires téléphonie</label><textarea name="tel_commentaires"></textarea></div></div>
+      </div>
+
+      <div id="mobile" class="section" data-section="Mobile">
+        <h3>📱 Mobile</h3><p class="hint">SIM/eSIM, forfaits, portabilité et livraison.</p><div class="grid"><div class="full"><label>Adresse livraison SIM</label><input name="mobile_livraison"></div></div><div id="mobileRepeats"></div><button type="button" class="mini ok" onclick="addMobile()">+ Ajouter une ligne mobile</button>
+      </div>
+
+      <div id="info" class="section" data-section="Informatique">
+        <h3>🖥️ Informatique</h3><p class="hint">Matériel, sécurité, sauvegarde et éléments techniques à prévoir.</p>
+        <div class="grid3">
+          <div><label>Firewall</label><select name="info_firewall"><option></option><option>Oui</option><option>Non</option></select></div><div><label>Switch</label><select name="info_switch"><option></option><option>Oui</option><option>Non</option></select></div><div><label>NAS</label><select name="info_nas"><option></option><option>Oui</option><option>Non</option></select></div>
+          <div><label>Ordinateurs</label><input type="number" name="info_pc" min="0"></div><div><label>Écrans</label><input type="number" name="info_ecrans" min="0"></div><div><label>Bornes Wi-Fi</label><input type="number" name="info_wifi" min="0"></div><div><label>Onduleurs</label><input type="number" name="info_onduleurs" min="0"></div><div><label>Serveurs physiques</label><input type="number" name="info_serveurs" min="0"></div><div><label>VM</label><input type="number" name="info_vm" min="0"></div>
+        </div>
+        <div class="calc">
+          <h3 style="color:#fff;margin-top:0">🧮 Calculateur Sauvegarde Acronis</h3>
+          <div class="grid3">
+            <div><label>Volumétrie à sauvegarder (Go)</label><input type="number" id="volume" name="backup_volume" min="0" step="50" value="100"></div>
+            <div><label>Nombre de jours de rétention</label><select id="retention" name="backup_retention"><option value="30">30 jours</option><option value="60">60 jours</option><option value="90">90 jours</option></select></div>
+            <div><label>Dossiers / VM à sauvegarder</label><input name="backup_elements" placeholder="Ex : Documents, serveur AD, VM ERP..."></div>
+          </div>
+          <div class="calcGrid"><div class="result"><small>Backup cloud mini</small><b id="backupMini">0 Go</b></div><div class="result"><small>Marge d'erreur ~5 %</small><b id="backupMarge">0 Go</b></div><div class="result"><small>Volume à proposer</small><b id="backupProposition">0 Go</b></div></div>
+        </div>
+        <div class="grid" style="margin-top:14px"><div class="full"><label>Informations complémentaires informatique</label><textarea name="info_commentaires"></textarea></div></div>
+      </div>
+
+      <div id="soft" class="section" data-section="Software">
+        <h3>☁️ Software / Microsoft 365</h3><p class="hint">Licences, tenant, domaine, messagerie, SharePoint et migrations.</p>
+        <div class="grid3"><div><label>Installation Microsoft 365</label><input type="number" name="m365_install" min="0"></div><div><label>M365 Apps</label><input type="number" name="m365_apps" min="0"></div><div><label>M365 Basic</label><input type="number" name="m365_basic" min="0"></div><div><label>M365 Standard</label><input type="number" name="m365_standard" min="0"></div><div><label>M365 Premium</label><input type="number" name="m365_premium" min="0"></div><div><label>Exchange P1</label><input type="number" name="exchange_p1" min="0"></div><div><label>Exchange P2</label><input type="number" name="exchange_p2" min="0"></div><div><label>Anti-spam</label><input type="number" name="antispam" min="0"></div><div><label>Volume données estimé (Go)</label><input type="number" name="migration_go" min="0"></div></div>
+        <div class="grid" style="margin-top:14px"><div><label>Tenant existant</label><input name="tenant_existing" placeholder="client.onmicrosoft.com"></div><div><label>Nom de domaine souhaité</label><input name="domain_name"></div><div><label>Contact prestataire tiers</label><input name="domain_provider_contact"></div><div><label>Migration à réaliser</label><select name="migration_needed"><option></option><option>Oui</option><option>Non</option></select></div><div class="full"><label>Informations complémentaires software</label><textarea name="soft_commentaires"></textarea></div></div>
+      </div>
+
+      <div id="heberge" class="section" data-section="Hébergé">
+        <h3>🏗️ Infrastructure hébergée</h3><p class="hint">VDOM, VPN, sites connectés et VM hébergées.</p>
+        <div class="grid3"><div><label>Firewall hébergé VDOM</label><select name="vdot_firewall"><option></option><option>Oui</option><option>Non</option></select></div><div><label>Utilisateurs</label><input type="number" name="vdot_users" min="0"></div><div><label>Utilisateurs VPN</label><input type="number" name="vdot_vpn" min="0"></div><div><label>Sites connectés</label><input type="number" name="vdot_sites" min="0"></div><div><label>Besoin VM hébergées</label><input type="number" name="hosted_vm_count" min="0"></div></div>
+        <div id="vmRepeats" style="margin-top:14px"></div><button type="button" class="mini ok" onclick="addVM()">+ Ajouter une VM hébergée</button><div class="grid" style="margin-top:14px"><div class="full"><label>Informations complémentaires hébergé</label><textarea name="hosted_commentaires"></textarea></div></div>
+      </div>
+
+      <div id="photos" class="section" data-section="Photos">
+        <h3>📸 Captures / Photos</h3><p class="hint">Ajouter les références ou liens vers les photos utiles : façade, portail d'éligibilité, baie de brassage, etc.</p>
+        <div class="grid"><div><label>Photo façade client</label><input name="photo_facade" placeholder="Lien, nom du fichier ou commentaire"></div><div><label>Photo portail d'éligibilité</label><input name="photo_eligibilite"></div><div><label>Photo baie de brassage</label><input name="photo_baie"></div><div><label>Autres photos</label><input name="photo_autres"></div></div>
+      </div>
+
+      <div id="resume" class="section" data-section="Résumé">
+        <h3>🧾 Résumé technique généré</h3><p class="hint">Ce bloc est généré automatiquement. Il peut être copié dans Teams, un ticket ou un dossier technique.</p>
+        <div class="actions" style="margin-bottom:12px"><button type="button" class="mini blue" onclick="generateSummary();copySummary()">📋 Générer et copier</button><button type="button" class="mini" onclick="downloadSummary()">⬇️ Télécharger en .txt</button></div>
+        <div id="summary" class="summaryBox"></div>
+      </div>
+    </form>
+  </section>
+</main>
+<div class="toast" id="toast">Action réalisée</div>
+<script>
+const $=s=>document.querySelector(s);const form=$('#cdcForm');
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200)}
+function field(label,name,type='text',extra=''){return `<div><label>${label}</label><input type="${type}" name="${name}" ${extra}></div>`}
+function addRepeat(container,html){const d=document.createElement('div');d.className='repeat';d.innerHTML=html;$(container).appendChild(d);bind();updateProgress();}
+function addInternet(){addRepeat('#internetRepeats',`<div class="repeatHead"><b>🌐 Lien / site</b><button type="button" class="mini danger" onclick="this.closest('.repeat').remove();updateProgress();generateSummary()">Supprimer</button></div><div class="grid3">${field('Nom du site','net_site')}${field('Code immeuble','net_code_immeuble')}${field('PM','net_pm')}${field('N° prise PTO','net_pto')}${field('Bâtiment','net_batiment')}${field('Escalier','net_escalier')}${field('Étage','net_etage')}${field('Tél fixe contact site','net_tel_fixe')}${field('Tél mobile contact site','net_tel_mobile')}<div><label>Type construction lien</label><select name="net_construction"><option></option><option>Création 1ère PTO</option><option>Création 2e PTO</option><option>Utilisation PTO existante</option></select></div><div><label>Mode livraison FTTO</label><select name="net_livraison"><option></option><option>PTO</option><option>Bandeau optique</option></select></div>${field('NDI site ou voisin','net_ndi')}<div><label>Livraison internet</label><select name="net_delivery"><option></option><option>Sur Firewall</option><option>Sur LAN client</option></select></div><div class="full"><label>Autres informations lien</label><textarea name="net_infos"></textarea></div></div>`)}
+function addPhone(){addRepeat('#phoneRepeats',`<div class="repeatHead"><b>☎️ Poste / ligne</b><button type="button" class="mini danger" onclick="this.closest('.repeat').remove();updateProgress();generateSummary()">Supprimer</button></div><div class="grid3">${field('Nom du poste ou personne','phone_name')}${field('Numéro à porter','phone_number')}${field('RIO','phone_rio')}<div><label>Type</label><select name="phone_type"><option></option><option>Remplacement</option><option>Nouveau poste</option></select></div>${field('Modèle téléphone','phone_model')}${field('Casque / extension','phone_accessory')}</div>`)}
+function addMobile(){addRepeat('#mobileRepeats',`<div class="repeatHead"><b>📱 Ligne mobile</b><button type="button" class="mini danger" onclick="this.closest('.repeat').remove();updateProgress();generateSummary()">Supprimer</button></div><div class="grid3">${field('Prénom','mobile_first')}${field('Nom','mobile_last')}${field('Opérateur demandé','mobile_operator')}${field('Forfait demandé','mobile_plan')}<div><label>SIM ou eSIM</label><select name="mobile_sim"><option></option><option>SIM</option><option>eSIM</option></select></div><div><label>Portabilité</label><select name="mobile_porta"><option></option><option>Oui</option><option>Non</option></select></div>${field('Date porta / création souhaitée','mobile_date','date')}${field('N° ligne + RIO','mobile_rio')}${field('Modèle téléphone','mobile_device')}<div class="full"><label>Informations complémentaires</label><textarea name="mobile_infos"></textarea></div></div>`)}
+function addVM(){addRepeat('#vmRepeats',`<div class="repeatHead"><b>🖥️ VM hébergée</b><button type="button" class="mini danger" onclick="this.closest('.repeat').remove();updateProgress();generateSummary()">Supprimer</button></div><div class="grid3">${field('Nom VM','vm_name')}${field('Rôle(s)','vm_roles')}${field('vCPU','vm_vcpu','number','min="0"')}${field('vRAM Go','vm_vram','number','min="0"')}${field('vHDD Go','vm_vhdd','number','min="0"')}${field('OS','vm_os')}</div>`)}
+function calcBackup(){const volume=parseFloat($('#volume').value)||0;const ret=parseFloat($('#retention').value)||0;const base=volume*.66;const backup=base*(1+.05*ret);const marge=backup*.05;const prop=Math.ceil((backup+marge)/100)*100;$('#backupMini').textContent=Math.round(backup).toLocaleString('fr-FR')+' Go';$('#backupMarge').textContent=(Math.round(marge*10)/10).toLocaleString('fr-FR')+' Go';$('#backupProposition').textContent=prop.toLocaleString('fr-FR')+' Go';return {backup,marge,prop}}
+function entries(){return Array.from(new FormData(form).entries()).filter(([k,v])=>String(v).trim()!=='')}
+const labels={raison_sociale:'Raison sociale',siret:'SIRET',adresse_facturation:'Adresse facturation',tel_facturation:'Téléphone facturation',code_artis:'Code Artis',contact_nom:'Contact facturation',contact_fonction:'Fonction contact',contact_tel:'Téléphone contact',contact_email:'Email contact',site_nom:'Site',site_siret:'SIRET site',site_adresse:'Adresse site',site_contact_nom:'Contact site',site_contact_fonction:'Fonction contact site',site_contact_tel:'Téléphone site',site_contact_mobile:'Mobile site',site_contact_email:'Email site',projet_description:'Description projet',projet_contraintes:'Contraintes',backup_volume:'Volumétrie sauvegarde',backup_retention:'Rétention',backup_elements:'Éléments sauvegardés'};
+function nice(k){return labels[k]||k.replaceAll('_',' ')}
+function generateSummary(){const b=calcBackup();let out=[];out.push('RÉSUMÉ TECHNIQUE - CAHIER DES CHARGES IT & TÉLÉCOM');out.push('=====================================================');out.push('');const data=entries();const main=['raison_sociale','site_nom','projet_description','projet_contraintes'];main.forEach(k=>{const v=data.find(x=>x[0]===k)?.[1];if(v)out.push(`- ${nice(k)} : ${v}`)});out.push('');out.push('SAUVEGARDE ACRONIS');out.push(`- Volumétrie saisie : ${$('#volume').value||0} Go`);out.push(`- Rétention : ${$('#retention').value||0} jours`);out.push(`- Backup cloud mini : ${Math.round(b.backup).toLocaleString('fr-FR')} Go`);out.push(`- Marge ~5 % : ${(Math.round(b.marge*10)/10).toLocaleString('fr-FR')} Go`);out.push(`- Volume à proposer : ${b.prop.toLocaleString('fr-FR')} Go`);out.push('');out.push('DÉTAIL DES INFORMATIONS SAISIES');out.push('-------------------------------');data.forEach(([k,v])=>out.push(`- ${nice(k)} : ${v}`));$('#summary').textContent=out.join('\n')}
+function updateProgress(){const required=Array.from(form.querySelectorAll('[required]'));const filled=required.filter(i=>String(i.value).trim()).length;const pct=required.length?Math.round(filled/required.length*100):0;$('#score').textContent=pct;$('#progressBar').style.width=pct+'%';const sections=Array.from(document.querySelectorAll('.section[data-section]'));const badges=$('#badges');badges.innerHTML='';sections.forEach(sec=>{const inputs=Array.from(sec.querySelectorAll('input,select,textarea')).filter(i=>i.name);const done=inputs.length&&inputs.some(i=>String(i.value).trim());const b=document.createElement('div');b.className='badge'+(done?' done':'');b.innerHTML=`<span>${done?'✅':'◇'} ${sec.dataset.section}</span><span>${done?'OK':'À faire'}</span>`;badges.appendChild(b)});generateSummary()}
+function saveDraft(){localStorage.setItem('cdcKoesioDraft',JSON.stringify(entries()));toast('Brouillon sauvegardé sur ce navigateur')}
+function loadDraft(){const raw=localStorage.getItem('cdcKoesioDraft');if(!raw){toast('Aucun brouillon trouvé');return} JSON.parse(raw).forEach(([k,v])=>{const el=form.querySelector(`[name="${CSS.escape(k)}"]`);if(el)el.value=v});updateProgress();toast('Brouillon rechargé')}
+async function copySummary(){generateSummary();try{await navigator.clipboard.writeText($('#summary').textContent);toast('Résumé copié dans le presse-papiers')}catch(e){toast('Copie impossible : sélectionnez le texte manuellement')}}
+function downloadSummary(){generateSummary();const blob=new Blob([$('#summary').textContent],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='resume-technique-cdc-koesio.txt';a.click();URL.revokeObjectURL(a.href)}
+function bind(){form.querySelectorAll('input,select,textarea').forEach(el=>{el.oninput=updateProgress;el.onchange=updateProgress})}
+addInternet();addPhone();addMobile();addVM();bind();updateProgress();
+</script>
+</body>
+</html>
