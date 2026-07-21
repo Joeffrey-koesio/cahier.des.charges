@@ -14,11 +14,23 @@
 body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at 0 0,#fff 0,#f8f3ff 35%,var(--bg) 100%);color:var(--txt)}
 header{position:sticky;top:0;z-index:20;background:linear-gradient(120deg,var(--violet),var(--violet2),var(--violet3));color:#fff;box-shadow:0 10px 30px rgba(91,42,134,.25)}
 .top{max-width:1320px;margin:auto;padding:18px 20px;display:flex;align-items:center;gap:18px;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:14px}.k{width:48px;height:48px;border-radius:14px;background:#fff;color:var(--violet);font-weight:900;font-size:32px;display:grid;place-items:center}.brand h1{margin:0;font-size:20px}.brand p{margin:2px 0 0;font-size:12px;opacity:.9}
-.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{border:0;border-radius:13px;padding:11px 14px;font-weight:750;cursor:pointer;background:#fff;color:var(--violet);box-shadow:0 8px 20px rgba(0,0,0,.12);transition:.2s}.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)}
-.progressWrap{height:7px;background:rgba(255,255,255,.22)}.progressBar{height:7px;width:0;background:linear-gradient(90deg,#fff,#ffd6f4,#aee2ff);transition:.3s}
-main{max-width:1320px;margin:auto;padding:24px 20px 70px;display:grid;grid-template-columns:300px 1fr;gap:22px}.side{position:sticky;top:94px;height:calc(100vh - 110px);overflow:auto}.panel{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);box-shadow:var(--shadow);border-radius:24px;padding:20px}.score{text-align:center}.score .big{font-size:52px;font-weight:900;color:var(--violet);line-height:1}.score small{color:var(--muted)}
-.badges{display:grid;gap:9px;margin-top:15px}.badge{padding:10px 12px;border-radius:14px;background:#f4edf9;color:#6f4b85;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:space-between}.badge.done{background:#e8f8ee;color:#14723c}.nav{display:grid;gap:8px;margin-top:16px}.nav a{text-decoration:none;color:var(--txt);padding:11px 12px;border-radius:14px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:13px}.nav a:hover{border-color:var(--violet2);color:var(--violet)}
+.brand{display:flex;align-items:center;gap:14px}
+.k{width:48px;height:48px;border-radius:14px;background:#fff;color:var(--violet);font-weight:900;font-size:32px;display:grid;place-items:center}
+.brand h1{margin:0;font-size:20px}.brand p{margin:2px 0 0;font-size:12px;opacity:.9}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:0;border-radius:13px;padding:11px 14px;font-weight:750;cursor:pointer;background:#fff;color:var(--violet);box-shadow:0 8px 20px rgba(0,0,0,.12);transition:.2s}
+.btn:hover{transform:translateY(-2px)}.btn.secondary{background:rgba(255,255,255,.16);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.progressWrap{height:7px;background:rgba(255,255,255,.22)}
+.progressBar{height:7px;width:0;background:linear-gradient(90deg,#fff,#ffd6f4,#aee2ff);transition:.3s}
+main{max-width:1320px;margin:auto;padding:24px 20px 70px;display:grid;grid-template-columns:300px 1fr;gap:22px}
+.side{position:sticky;top:90px;max-height:calc(100vh - 100px);overflow-y:auto;overflow-x:hidden;}
+.panel{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.75);box-shadow:var(--shadow);border-radius:24px;padding:20px}.score{text-align:center}.score .big{font-size:52px;font-weight:900;color:var(--violet);line-height:1}.score small{color:var(--muted)}
+.badges{display:grid;gap:6px;margin-top:12px;}
+.badge{padding:8px 10px;border-radius:12px;background:#f4edf9;color:#6f4b85;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:space-between;}
+.badge.done{background:#e8f8ee;color:#14723c}
+.nav{display:grid;gap:8px;margin-top:16px}
+.nav a{text-decoration:none;color:var(--txt);padding:11px 12px;border-radius:14px;background:#fff;border:1px solid var(--line);font-weight:700;font-size:13px}
+.nav a:hover{border-color:var(--violet2);color:var(--violet)}
 .content{display:grid;gap:18px}.hero{position:relative;overflow:hidden;border-radius:28px;padding:28px;background:linear-gradient(135deg,#fff,#f4e7ff);box-shadow:var(--shadow);border:1px solid #fff}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-80px;top:-80px;background:linear-gradient(135deg,rgba(142,36,170,.25),rgba(255,138,226,.2));filter:blur(8px)}.hero h2{margin:0 0 8px;font-size:30px;color:var(--violet)}.hero p{margin:0;color:var(--muted);max-width:850px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-weight:750;color:#5a4e68;font-size:13px}
 .section{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow);border-radius:24px;padding:22px}.section h3{margin:0 0 6px;color:var(--violet);display:flex;align-items:center;gap:10px}.section .hint{margin:0 0 18px;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.full{grid-column:1/-1}
 label{display:block;font-size:12px;font-weight:800;color:#655b75;margin-bottom:7px}.required label:after{content:" *";color:var(--bad)}input,select,textarea{width:100%;border:2px solid var(--line);border-radius:14px;padding:12px 13px;font:inherit;background:#fff;color:var(--txt);outline:none;transition:.2s}textarea{min-height:86px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:var(--violet2);box-shadow:0 0 0 4px rgba(142,36,170,.11)}
@@ -171,7 +183,7 @@ function updateProgress(){const required=Array.from(form.querySelectorAll('[requ
 
     return true;
 
-});const b=document.createElement('div');b.className='badge'+(done?' done':'');b.innerHTML=`<span>${done?'✅':'◇'} ${sec.dataset.section}</span><span>${done?'OK':'À faire'}</span>`;badges.appendChild(b)});generateSummary()}
+});const b=document.createElement('div');b.className='badge'+(done?' done':'');b.innerHTML=`<span>${done?'✅':'◇'} ${sec.dataset.section}</span><span>${done?'OK':'À faire'}</span>`;if(sec.dataset.section === 'Résumé'){return;}badges.appendChild(b)});generateSummary()}
 async function copySummary(){generateSummary();try{await navigator.clipboard.writeText($('#summary').textContent);toast('Résumé copié dans le presse-papiers')}catch(e){toast('Copie impossible : sélectionnez le texte manuellement')}}
 function downloadSummary(){generateSummary();const blob=new Blob([$('#summary').textContent],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='resume-technique-cdc-koesio.txt';a.click();URL.revokeObjectURL(a.href)}
 function bind(){form.querySelectorAll('input,select,textarea').forEach(el=>{el.oninput=updateProgress;el.onchange=updateProgress})}
