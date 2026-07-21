@@ -199,9 +199,11 @@ function exportProject() {
     link.click();
 
 }
-document
-.getElementById('importFile')
-.addEventListener('change', e => {
+window.addEventListener('DOMContentLoaded', () => {
+
+    document
+    .getElementById('importFile')
+    .addEventListener('change', e => {
 
     const file = e.target.files[0];
 
@@ -247,8 +249,8 @@ else{
     reader.readAsText(file);
 
 });
+});
 </script>
 <input type="file" id="importFile" accept=".json" style="display:none">
-
 </body>
 </html>
