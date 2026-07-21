@@ -91,6 +91,49 @@ label{display:block;font-size:12px;font-weight:800;color:#655b75;margin-bottom:7
         <h3>🎯 Projet</h3><p class="hint">Décrire le besoin avec le maximum de contexte, même ce qui paraît secondaire.</p>
         <div class="grid"><div class="required full"><label>Description du projet</label><textarea name="projet_description" required placeholder="Ex : ouverture de site, déménagement, refonte téléphonie, migration cloud, sécurisation réseau..."></textarea></div><div class="full"><label>Contraintes / échéances / coupures acceptées</label><textarea name="projet_contraintes"></textarea></div></div>
       </div>
+	  <div id="besoins" class="section">
+
+    <h3>🎯 Besoins identifiés</h3>
+
+    <p class="hint">
+        Sélectionnez uniquement les besoins concernés.
+    </p>
+
+    <div class="grid">
+
+        <label>
+            <input type="checkbox" id="needInternet">
+            Internet
+        </label>
+
+        <label>
+            <input type="checkbox" id="needPhone">
+            Téléphonie
+        </label>
+
+        <label>
+            <input type="checkbox" id="needMobile">
+            Mobile
+        </label>
+
+        <label>
+            <input type="checkbox" id="needIT">
+            Informatique
+        </label>
+
+        <label>
+            <input type="checkbox" id="needM365">
+            Microsoft 365
+        </label>
+
+        <label>
+            <input type="checkbox" id="needHosted">
+            Hébergé
+        </label>
+
+    </div>
+
+</div>
 
       <div id="internet" class="section" data-section="Liens Internet">
         <h3>🌐 Liens Internet</h3><p class="hint">Dupliquer les blocs si plusieurs sites sont concernés.</p><div id="internetRepeats"></div><button type="button" class="mini ok" onclick="addInternet()">+ Ajouter un lien / site</button>
@@ -216,6 +259,64 @@ b.onclick = () => {
 async function copySummary(){generateSummary();try{await navigator.clipboard.writeText($('#summary').textContent);toast('Résumé copié dans le presse-papiers')}catch(e){toast('Copie impossible : sélectionnez le texte manuellement')}}
 function downloadSummary(){generateSummary();const blob=new Blob([$('#summary').textContent],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='resume-technique-cdc-koesio.txt';a.click();URL.revokeObjectURL(a.href)}
 function bind(){form.querySelectorAll('input,select,textarea').forEach(el=>{el.oninput=updateProgress;el.onchange=updateProgress})}
+function updateVisibility(){
+
+    document.getElementById('internet')
+        .style.display =
+        document.getElementById('needInternet').checked
+        ? ''
+        : 'none';
+
+    document.getElementById('tel')
+        .style.display =
+        document.getElementById('needPhone').checked
+        ? ''
+        : 'none';
+
+    document.getElementById('mobile')
+        .style.display =
+        document.getElementById('needMobile').checked
+        ? ''
+        : 'none';
+
+    document.getElementById('info')
+        .style.display =
+        document.getElementById('needIT').checked
+        ? ''
+        : 'none';
+
+    document.getElementById('soft')
+        .style.display =
+        document.getElementById('needM365').checked
+        ? ''
+        : 'none';
+
+    document.getElementById('heberge')
+        .style.display =
+        document.getElementById('needHosted').checked
+        ? ''
+        : 'none';
+
+}
+[
+'needInternet',
+'needPhone',
+'needMobile',
+'needIT',
+'needM365',
+'needHosted'
+].forEach(id => {
+
+    document
+    .getElementById(id)
+    .addEventListener(
+        'change',
+        updateVisibility
+    );
+
+});
+
+updateVisibility();
 addInternet();addPhone();addMobile();addVM();bind();updateProgress();
 function exportProject() {
 
