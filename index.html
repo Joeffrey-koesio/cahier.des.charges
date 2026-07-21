@@ -34,8 +34,8 @@ label{display:block;font-size:12px;font-weight:800;color:#655b75;margin-bottom:7
   <div class="top">
     <div class="brand"><div class="k">k</div><div><h1>Cahier des charges IT & Télécom</h1><p>Version prototype - Koesio Méditerranée</p></div></div>
     <div class="actions">
-      <button class="btn secondary">📤 Exporter</button>
-      <button class="btn secondary" onclick="loadDraft()">↩️ Recharger</button>
+      <button class="btn secondary" onclick="exportProject()">📤 Exporter</button>
+      <button class="btn secondary" onclick="document.getElementById('importFile').click()">📥 Importer</button>
       <button class="btn" onclick="copySummary()">📋 Copier le résumé technique</button>
       <button class="btn" onclick="window.print()">🖨️ Imprimer / PDF</button>
     </div>
@@ -175,6 +175,68 @@ async function copySummary(){generateSummary();try{await navigator.clipboard.wri
 function downloadSummary(){generateSummary();const blob=new Blob([$('#summary').textContent],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='resume-technique-cdc-koesio.txt';a.click();URL.revokeObjectURL(a.href)}
 function bind(){form.querySelectorAll('input,select,textarea').forEach(el=>{el.oninput=updateProgress;el.onchange=updateProgress})}
 addInternet();addPhone();addMobile();addVM();bind();updateProgress();
+function exportProject() {
+
+    const data = Object.fromEntries(
+        new FormData(form).entries()
+    );
+
+    const blob = new Blob(
+        [JSON.stringify(data, null, 2)],
+        { type: "application/json" }
+    );
+
+    const link = document.createElement('a');
+
+    link.href = URL.createObjectURL(blob);
+
+    const client =
+        data.raison_sociale || 'Projet';
+
+    link.download =
+        `${client}.cdc.json`;
+
+    link.click();
+
+}
+document
+.getElementById('importFile')
+.addEventListener('change', e => {
+
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function() {
+
+        const data =
+            JSON.parse(reader.result);
+
+        Object.entries(data)
+        .forEach(([key,value]) => {
+
+            const field =
+                form.querySelector(
+                    `[name="${key}"]`
+                );
+
+            if(field){
+                field.value = value;
+            }
+
+        });
+
+        updateProgress();
+
+    };
+
+    reader.readAsText(file);
+
+});
 </script>
+<input type="file" id="importFile" accept=".json" style="display:none">
+
 </body>
 </html>
