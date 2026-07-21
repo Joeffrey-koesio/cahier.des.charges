@@ -155,12 +155,18 @@ function nice(k){return labels[k]||k.replaceAll('_',' ')}
 function generateSummary(){const b=calcBackup();let out=[];out.push('RÉSUMÉ TECHNIQUE - CAHIER DES CHARGES IT & TÉLÉCOM');out.push('=====================================================');out.push('');const data=entries();const main=['raison_sociale','site_nom','projet_description','projet_contraintes'];main.forEach(k=>{const v=data.find(x=>x[0]===k)?.[1];if(v)out.push(`- ${nice(k)} : ${v}`)});out.push('');out.push('SAUVEGARDE ACRONIS');out.push(`- Volumétrie saisie : ${$('#volume').value||0} Go`);out.push(`- Rétention : ${$('#retention').value||0} jours`);out.push(`- Backup cloud mini : ${Math.round(b.backup).toLocaleString('fr-FR')} Go`);out.push(`- Marge ~5 % : ${(Math.round(b.marge*10)/10).toLocaleString('fr-FR')} Go`);out.push(`- Volume à proposer : ${b.prop.toLocaleString('fr-FR')} Go`);out.push('');out.push('DÉTAIL DES INFORMATIONS SAISIES');out.push('-------------------------------');data.forEach(([k,v])=>out.push(`- ${nice(k)} : ${v}`));$('#summary').textContent=out.join('\n')}
 function updateProgress(){const required=Array.from(form.querySelectorAll('[required]'));const filled=required.filter(i=>String(i.value).trim()).length;const pct=required.length?Math.round(filled/required.length*100):0;$('#score').textContent=pct;$('#progressBar').style.width=pct+'%';const sections=Array.from(document.querySelectorAll('.section[data-section]'));const badges=$('#badges');badges.innerHTML='';sections.forEach(sec=>{const inputs=Array.from(sec.querySelectorAll('input,select,textarea')).filter(i=>i.name);const done = inputs.some(i => {
 
-    const val = String(i.value || '').trim();
+    // Ignore les champs non renseignés
+    if (!i.value || String(i.value).trim() === '') {
+        return false;
+    }
 
-    if (val === '') return false;
-
-    // Ignore la valeur par défaut du calculateur
-    if (i.id === 'volume' && val === '100') return false;
+    // Ignore les sélecteurs laissés sur le premier choix
+    if (
+        i.tagName === 'SELECT' &&
+        i.selectedIndex === 0
+    ) {
+        return false;
+    }
 
     return true;
 
