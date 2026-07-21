@@ -34,7 +34,7 @@ label{display:block;font-size:12px;font-weight:800;color:#655b75;margin-bottom:7
   <div class="top">
     <div class="brand"><div class="k">k</div><div><h1>Cahier des charges IT & Télécom</h1><p>Version prototype - Koesio Méditerranée</p></div></div>
     <div class="actions">
-      <button class="btn secondary" onclick="saveDraft()">💾 Sauvegarder</button>
+      <button class="btn secondary">📤 Exporter</button>
       <button class="btn secondary" onclick="loadDraft()">↩️ Recharger</button>
       <button class="btn" onclick="copySummary()">📋 Copier le résumé technique</button>
       <button class="btn" onclick="window.print()">🖨️ Imprimer / PDF</button>
@@ -158,8 +158,6 @@ inputs.filter(i =>
 !i.defaultValue ||
 i.value !== i.defaultValue
 ).length > 0;;const b=document.createElement('div');b.className='badge'+(done?' done':'');b.innerHTML=`<span>${done?'✅':'◇'} ${sec.dataset.section}</span><span>${done?'OK':'À faire'}</span>`;badges.appendChild(b)});generateSummary()}
-function saveDraft(){localStorage.setItem('cdcKoesioDraft',JSON.stringify(entries()));toast('Brouillon sauvegardé sur ce navigateur')}
-function loadDraft(){const raw=localStorage.getItem('cdcKoesioDraft');if(!raw){toast('Aucun brouillon trouvé');return} JSON.parse(raw).forEach(([k,v])=>{const el=form.querySelector(`[name="${CSS.escape(k)}"]`);if(el)el.value=v});updateProgress();toast('Brouillon rechargé')}
 async function copySummary(){generateSummary();try{await navigator.clipboard.writeText($('#summary').textContent);toast('Résumé copié dans le presse-papiers')}catch(e){toast('Copie impossible : sélectionnez le texte manuellement')}}
 function downloadSummary(){generateSummary();const blob=new Blob([$('#summary').textContent],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='resume-technique-cdc-koesio.txt';a.click();URL.revokeObjectURL(a.href)}
 function bind(){form.querySelectorAll('input,select,textarea').forEach(el=>{el.oninput=updateProgress;el.onchange=updateProgress})}
