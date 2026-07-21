@@ -180,7 +180,39 @@ function updateProgress(){const required=Array.from(form.querySelectorAll('[requ
 
     return true;
 
-});const b=document.createElement('div');b.className='badge'+(done?' done':'');b.innerHTML=`<span>${done?'✅':'◇'} ${sec.dataset.section}</span><span>${done?'OK':'À faire'}</span>`;if(sec.dataset.section === 'Résumé'){return;}badges.appendChild(b)});generateSummary()}
+});const iconMap = {
+    'Client':'🏢',
+    'Site installation':'📍',
+    'Projet':'🎯',
+    'Liens Internet':'🌐',
+    'Téléphonie':'☎️',
+    'Mobile':'📱',
+    'Informatique':'🖥️',
+    'Software':'☁️',
+    'Hébergé':'🏗️',
+    'Photos':'📸'
+};
+const b=document.createElement('div');b.className='badge'+(done?' done':'');b.innerHTML =
+`<span>${done?'✅':'◇'} ${iconMap[sec.dataset.section] || '📄'} ${sec.dataset.section}</span>
+ <span>${done?'OK':'À faire'}</span>`;
+
+b.style.cursor = 'pointer';
+
+b.onclick = () => {
+
+    const target =
+        document.getElementById(
+            sec.id
+        );
+
+    if(target){
+        target.scrollIntoView({
+            behavior:'smooth',
+            block:'start'
+        });
+    }
+
+};if(sec.dataset.section === 'Résumé'){return;}badges.appendChild(b)});generateSummary()}
 async function copySummary(){generateSummary();try{await navigator.clipboard.writeText($('#summary').textContent);toast('Résumé copié dans le presse-papiers')}catch(e){toast('Copie impossible : sélectionnez le texte manuellement')}}
 function downloadSummary(){generateSummary();const blob=new Blob([$('#summary').textContent],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='resume-technique-cdc-koesio.txt';a.click();URL.revokeObjectURL(a.href)}
 function bind(){form.querySelectorAll('input,select,textarea').forEach(el=>{el.oninput=updateProgress;el.onchange=updateProgress})}
